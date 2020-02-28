@@ -6,8 +6,6 @@
 //  Copyright © 2020 Alex Sander. All rights reserved.
 //
 
-import Foundation
-import CoreGraphics
 import Spring
 
 struct Animation {
@@ -17,6 +15,19 @@ struct Animation {
     let duration: CGFloat
     let damping: CGFloat
     let velocity: CGFloat
+    
+    /*
+     // for use in one label IBOutlet !!!
+    var description: String {
+        return """
+        preset: \(name)
+        curve: \(curve)
+        force: \(String(format: "%.02f", force))
+        duration: \(String(format: "%.02f", duration))
+        delay: \(String(format: "%.02f", delay))
+        """
+    }
+ */
 }
 
 private let animations: [Spring.AnimationPreset] = [
@@ -85,7 +96,7 @@ extension Animation {
         var anims = [Animation]()
         for i in 0..<animations.count {
             anims.append(Animation(name: animations[i].rawValue,
-                                   curve: curves[Int.random(in: 0..<curves.count)].rawValue,
+                                   curve: curves.randomElement()?.rawValue ?? "easeIn",
                                    force: CGFloat.random(in: 0..<5),
                                    duration: CGFloat.random(in: 1..<5),
                                    damping: CGFloat.random(in: 0..<1),
